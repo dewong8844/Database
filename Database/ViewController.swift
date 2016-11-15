@@ -31,6 +31,7 @@ class ViewController: UIViewController {
                                     in: .userDomainMask)
         databasePath = dirPaths[0].appendingPathComponent("contacts.db").path
         if !filemgr.fileExists(atPath: databasePath as String) {
+        
             // copy initial version of contacts.db file from main bundle
             let bundlePath = Bundle.main.path(forResource: "contacts", ofType: ".db")
             if bundlePath == nil {
@@ -76,17 +77,35 @@ class ViewController: UIViewController {
     @IBAction func saveData(_ sender: UIButton) {
         let contactDB = FMDatabase(path: databasePath as String)
         if (contactDB?.open())! {
-            let insertSQL = "INSERT INTO contacts (name, address, phone) VALUES ('\(name.text!)', '\(address.text!)', '\(phone.text!)')"
-            let result = contactDB?.executeUpdate(insertSQL, withArgumentsIn: nil)
-            if !result! {
-                status.text = "Failed to add contact"
-                print ("Error \(contactDB?.lastErrorMessage())")
+            let querySQL = "SELECT address, phone FROM contacts WHERE name = '\(name.text!)'"
+            let results:FMResultSet? = contactDB?.executeQuery(querySQL, withArgumentsIn: nil)
+            if results?.next() == true {
+                let updateSQL = "UPDATE contacts SET address='\(address.text!)', phone='\(phone.text!)' WHERE name='\(name.text!)'"
+                let result = contactDB?.executeUpdate(updateSQL, withArgumentsIn: nil)
+                if !result! {
+                    status.text = "Failed to update contact"
+                    print ("Error \(contactDB?.lastErrorMessage())")
+                }
+                else {
+                    status.text = "Contact Updated"
+                    name.text = ""
+                    address.text = ""
+                    phone.text = ""
+                }
             }
             else {
-                status.text = "Contact Added"
-                name.text = ""
-                address.text = ""
-                phone.text = ""
+                let insertSQL = "INSERT INTO contacts (name, address, phone) VALUES ('\(name.text!)', '\(address.text!)', '\(phone.text!)')"
+                let result = contactDB?.executeUpdate(insertSQL, withArgumentsIn: nil)
+                if !result! {
+                    status.text = "Failed to add contact"
+                    print ("Error \(contactDB?.lastErrorMessage())")
+                }
+                else {
+                    status.text = "Contact Added"
+                    name.text = ""
+                    address.text = ""
+                    phone.text = ""
+                }
             }
             contactDB?.close()
         }
@@ -117,5 +136,26 @@ class ViewController: UIViewController {
         }
     }
 
+    @IBAction func deleteContact(_ sender: UIButton) {
+        let contactDB = FMDatabase(path: databasePath as String)
+        if (contactDB?.open())! {
+            let deleteSQL = "DELETE FROM contacts WHERE name = '\(name.text!)'"
+            let result = contactDB?.executeUpdate(deleteSQL, withArgumentsIn: nil)
+            if !result! {
+                status.text = "Failed to delete contact"
+                print ("Error \(contactDB?.lastErrorMessage())")
+            }
+            else {
+                status.text = "Contact Deleted"
+                name.text = ""
+                address.text = ""
+                phone.text = ""
+            }
+            contactDB?.close()
+        }
+        else {
+            print ("Error \(contactDB?.lastErrorMessage())")
+        }
+    }
 }
 
