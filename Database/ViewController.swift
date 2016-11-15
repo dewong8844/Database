@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     // MARK: Properties
     
     @IBOutlet weak var name: UITextField!
@@ -20,7 +20,13 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initContactsDB();
+
+        // Handle the text field's user input through delegate callbacks.
+        name.delegate = self
+        address.delegate = self
+        phone.delegate = self
+
+        initContactsDB()
     }
     
     // MARK: Initialization
@@ -71,6 +77,13 @@ class ViewController: UIViewController {
             print ("contacts.db found and ready to go")
             status.text = "Contact DB is ready to use"
         }
+    }
+
+    // MARK: UITextFieldDelegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // Hide the keyboard
+        textField.resignFirstResponder()
+        return true
     }
 
     // MARK: Actions

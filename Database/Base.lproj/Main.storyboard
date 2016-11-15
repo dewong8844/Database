@@ -55,18 +55,18 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="34" placeholderIntrinsicHeight="30" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dRu-sg-CmR">
-                                        <rect key="frame" x="10" y="191" width="323" height="30"/>
-                                        <state key="normal" title="Save"/>
-                                        <connections>
-                                            <action selector="saveData:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HYK-xz-Kks"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="30" placeholderIntrinsicHeight="30" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RT4-NE-Yue">
-                                        <rect key="frame" x="156.5" y="233" width="30" height="30"/>
+                                        <rect key="frame" x="156.5" y="191" width="30" height="30"/>
                                         <state key="normal" title="Find"/>
                                         <connections>
                                             <action selector="findContact:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wek-0H-Zfm"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="34" placeholderIntrinsicHeight="30" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dRu-sg-CmR">
+                                        <rect key="frame" x="10" y="233" width="323" height="30"/>
+                                        <state key="normal" title="Save"/>
+                                        <connections>
+                                            <action selector="saveData:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HYK-xz-Kks"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="45" placeholderIntrinsicHeight="30" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijy-rv-3FJ">
@@ -84,7 +84,7 @@
                                     <constraint firstItem="oa0-M8-d6B" firstAttribute="leading" secondItem="bLc-CG-cOK" secondAttribute="leading" id="RMK-BZ-8au"/>
                                     <constraint firstItem="cTL-Fo-ZMh" firstAttribute="leading" secondItem="bLc-CG-cOK" secondAttribute="leading" id="Wbc-E6-1Lc"/>
                                     <constraint firstAttribute="trailing" secondItem="oa0-M8-d6B" secondAttribute="trailing" id="b5t-nF-H0R"/>
-                                    <constraint firstItem="dRu-sg-CmR" firstAttribute="top" secondItem="bLc-CG-cOK" secondAttribute="top" constant="191" id="mM1-0u-TCf"/>
+                                    <constraint firstItem="dRu-sg-CmR" firstAttribute="top" secondItem="RT4-NE-Yue" secondAttribute="bottom" constant="12" id="hSg-K0-e1v"/>
                                     <constraint firstAttribute="trailing" secondItem="mKv-Cs-FX6" secondAttribute="trailing" id="tYy-7z-7n2"/>
                                 </constraints>
                             </stackView>
