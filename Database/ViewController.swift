@@ -61,10 +61,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
             
             if (contactDB?.open())! {
-                let sql_stmt = "CREATE TABLE IF NOT EXISTS contacts (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, ADDRESS TEXT, PHONE TEXT"
+                let sql_stmt = "CREATE TABLE IF NOT EXISTS contacts (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, ADDRESS TEXT, PHONE TEXT)"
                 if !(contactDB?.executeStatements(sql_stmt))! {
                     print ("Error \(contactDB?.lastErrorMessage())")
-                    status.text = "Create contacts table failed, may already exist"
+                    status.text = "Create contacts table failed"
                 }
                 contactDB?.close()
             }
@@ -77,6 +77,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
             print ("contacts.db found and ready to go")
             status.text = "Contact DB is ready to use"
         }
+        
+        name.returnKeyType = .done
+        address.returnKeyType = .done
+        phone.returnKeyType = .done
     }
 
     // MARK: UITextFieldDelegate
